@@ -1,8 +1,11 @@
 require('dotenv').config()
 
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const mongoose = require('mongoose')
+
+app.use(cors());
 
 // MongoDB
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
@@ -16,4 +19,4 @@ app.use(express.json())
 const subscribersRouter = require('./routes/subscribersRouter')
 app.use('/subscribers', subscribersRouter)
 
-app.listen(3000, () => console.log('Server Started'))
+app.listen(3012, () => console.log('Server Started'))

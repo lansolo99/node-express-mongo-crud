@@ -28,6 +28,7 @@ router.get('/:id', getSubscriber, (req, res) => {
 
 // Creating one
 router.post('/', async (req, res) => {
+  console.log('post request received');
   const subscriber = new Subscriber({
     name: req.body.name,
     subscribedToChannel: req.body.subscribedToChannel
@@ -38,7 +39,7 @@ router.post('/', async (req, res) => {
     // return created document
     res.status(201).json(newSubscriber)
   } catch (err) {
-    res.status(400).json({ message: err.message })
+    res.status(400).json({ message: err })
   }
 })
 
@@ -78,7 +79,7 @@ router.delete('/:id', getSubscriber, async (req, res) => {
 async function getSubscriber(req, res, next) {
   let subscriber
   try {
-    console.log(`req.params.id: `, req.params.id);
+
     // Get by prop -> name
     subscriber = await (await Subscriber.findOne({name: req.params.id }))
 
